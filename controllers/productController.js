@@ -48,8 +48,18 @@ const getProducts = asyncHandler( async (req, res) => {
 
 })
 
+const getProduct = asyncHandler( async (req, res) => {
+     const product = await Product.findById(req.params.id)
+     if(!product){
+        res.status(404)
+        throw new Error("Product Not Found")
+     }
+     res.status(201).json(product)
+
+})
+
 
 
 module.exports = {
-    createProduct, getProducts
+    createProduct, getProducts, getProduct
 }
